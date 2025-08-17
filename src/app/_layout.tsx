@@ -1,12 +1,13 @@
-import "../../styles/global.css";
+import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import "../styles/global.css";
 
 export default function RootLayout() {
   return (
     <View className="flex-1 bg-background">
       <Tabs
+        initialRouteName="home" // Define 'home' como rota inicial
         screenOptions={{
           headerShown: false,
           tabBarActiveTintColor: "#2563EB",
