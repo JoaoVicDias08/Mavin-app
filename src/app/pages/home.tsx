@@ -29,11 +29,6 @@ export default function Home() {
 
   const cvRef = useRef<View>(null);
 
-  // Logout
-  const handleLogout = async () => {
-    await AsyncStorage.removeItem("Token");
-    router.replace("/");
-  };
 
   // Gerar / baixar CV
   const handleDownloadCV = async () => {
@@ -63,9 +58,18 @@ export default function Home() {
     }
   };
 
+  // Salvar CV
+  const saveCV = async () => {
+    const cv = { nome, dataNascimento, endereco, formacao, experiencia, proficiencia, foto };
+    const curriculosJson = await AsyncStorage.getItem("curriculos");
+    const curriculos = curriculosJson ? JSON.parse(curriculosJson) : [];
+    curriculos.push(cv);
+    await AsyncStorage.setItem("curriculos", JSON.stringify(curriculos));
+  };
+
   return (
-    <ScrollView className="flex-1 bg-background p-4 mt-5">
-      <Text className="font-titulo text-titulo text-2xl mb-4">
+    <ScrollView className="flex-1 bg-background pt-20 p-4">
+      <Text className="font-titulo text-titulo text-2xl mb-4 bg-blue-500 rounded-2xl py-3 text-center">
         Preencha seu Currículo
       </Text>
 
@@ -89,18 +93,21 @@ export default function Home() {
         value={nome}
         onChangeText={setNome}
         className="bg-inputBackground border-borda p-3 rounded mb-2 font-texto"
+        placeholderTextColor="black"
       />
       <TextInput
         placeholder="Data de Nascimento"
         value={dataNascimento}
         onChangeText={setDataNascimento}
         className="bg-inputBackground border-borda p-3 rounded mb-2 font-texto"
+        placeholderTextColor="black"
       />
       <TextInput
         placeholder="Endereço"
         value={endereco}
         onChangeText={setEndereco}
         className="bg-inputBackground border-borda p-3 rounded mb-2 font-texto"
+        placeholderTextColor="black"
       />
 
       <View className="bg-inputBackground border-borda rounded mb-2">
@@ -122,6 +129,7 @@ export default function Home() {
         value={experiencia}
         onChangeText={setExperiencia}
         className="bg-inputBackground border-borda p-3 rounded mb-2 font-texto"
+        placeholderTextColor="black"
       />
 
       <View className="bg-inputBackground border-borda rounded mb-4">
@@ -182,18 +190,14 @@ export default function Home() {
       {/* Botões */}
       <TouchableOpacity
         className="bg-botaoPrimario p-4 rounded-xl mb-3"
-        onPress={handleDownloadCV}
+        onPress={async () => {
+          await handleDownloadCV();
+          await saveCV();
+        }}
       >
         <Text className="font-titulo text-background text-center text-lg">
           Gerar / Baixar CV
         </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        onPress={handleLogout}
-        className="bg-black px-4 py-3 rounded-2xl"
-      >
-        <Text className="text-white text-center font-texto">Sair</Text>
       </TouchableOpacity>
       <View className="h-20" />
     </ScrollView>

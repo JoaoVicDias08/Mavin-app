@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       colors: {
         background: "#0F172A",       // Fundo principal da tela
+        card: "#1E293B",       // Fundo principal da tela
         titulo: "#FFFFFF",           // Texto de títulos e destaques
         botaoPrimario: "#06B6D4",   // Botões principais (ex.: Cadastrar)
         botaoSecundario: "#8B5CF6", // Botões secundários (ex.: Login)
