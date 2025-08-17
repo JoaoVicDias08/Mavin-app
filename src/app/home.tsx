@@ -1,19 +1,19 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Picker } from "@react-native-picker/picker";
+import * as FileSystem from "expo-file-system";
+import * as ImagePicker from "expo-image-picker";
+import { useRouter } from "expo-router";
+import * as Sharing from "expo-sharing";
 import React, { useRef, useState } from "react";
 import {
-  View,
+  Image,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
-  ScrollView,
-  Image,
+  View,
 } from "react-native";
-import { useRouter } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { captureRef } from "react-native-view-shot";
-import * as FileSystem from "expo-file-system";
-import * as Sharing from "expo-sharing";
-import { Picker } from "@react-native-picker/picker";
-import * as ImagePicker from "expo-image-picker";
 
 export default function Home() {
   const router = useRouter();
@@ -114,6 +114,8 @@ export default function Home() {
         <Picker
           selectedValue={formacao}
           onValueChange={(itemValue) => setFormacao(itemValue)}
+          style={{ color: "black" }} // cor preta
+          dropdownIconColor="black" // ícone preto (Android)
         >
           <Picker.Item label="Selecione sua formação" value="" />
           <Picker.Item label="Ensino Médio" value="Ensino Médio" />
@@ -136,6 +138,8 @@ export default function Home() {
         <Picker
           selectedValue={proficiencia}
           onValueChange={(itemValue) => setProficiencia(itemValue)}
+          style={{ color: "black" }} // cor preta
+          dropdownIconColor="black" // ícone preto (Android)
         >
           <Picker.Item label="Selecione seu nível de proficiência" value="" />
           <Picker.Item label="Básico" value="Básico" />
