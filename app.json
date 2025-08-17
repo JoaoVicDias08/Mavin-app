@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Mavin",
-    "slug": "Mavin",
+    "slug": "Mavin-app",
     "icon": "./assets/icon.png",
     "version": "1.0.0",
     "orientation": "portrait",
